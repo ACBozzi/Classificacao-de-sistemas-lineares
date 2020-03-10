@@ -2,8 +2,11 @@
 #define __SISLINEAR_H__
 
 // Parâmetros para teste de convergência
-#define MAXIT 500
+#define MAXIT 5
 #define EPS 1.0e-4
+
+#define DIAG 32
+
 
 typedef double real_t;
 
@@ -17,6 +20,7 @@ typedef struct {
 // Alocaçao e desalocação de memória
 SistLinear_t* alocaSistLinear (unsigned int n);
 void liberaSistLinear (SistLinear_t *SL);
+void inicializaSistLinear (SistLinear_t *SL);
 
 // Calcula a normaL2 do resíduo
 double normaL2Residuo(SistLinear_t *SL);

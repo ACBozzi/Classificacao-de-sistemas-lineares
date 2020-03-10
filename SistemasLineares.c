@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "utils.h"
 #include "SistemasLineares.h"
@@ -35,6 +36,24 @@ void liberaSistLinear (SistLinear_t *SL)
 }
 //-------------------------------------------------------------------
 
+// Inicializa SL
+void inicializaSistLinear (SistLinear_t *SL)
+{
+  static double invRandMax = 1.0 / (double)RAND_MAX;
+  // inicializa a matriz A
+  for (unsigned int i=0; i<SL->n; ++i)
+     for (unsigned int j=0; j<SL->n; ++j)
+     {
+        SL->A[i*SL->n+j] = ( (i==j) ? (double)(DIAG<<1) : 1.0 )  * (double)rand() * invRandMax;
+     }
+
+  // inicializa vetores b e x
+  for (unsigned int i=0; i<SL->n; ++i)
+  {
+     SL->b[i] = (double)rand() * invRandMax;
+     SL->x[i] = 0.0;
+  }
+}
 
 // Calcula a normaL2 do resíduo
 double normaL2Residuo(SistLinear_t *SL)
